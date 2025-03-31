@@ -36,7 +36,7 @@ export const getContracts = async (address) => {  //getting all games created by
 
 export const getChallenges = async (address) => { //getting all game where current user is challenged by others
   const response = await fetch(
-    `https://rpsbackend-eln7.onrender.com/myChallenges/${address}/`,
+    `https://rpsbackend-eln7.onrender.com/api/myChallenges/${address}/`,
     {
       method: "GET",
       headers: {
@@ -58,7 +58,7 @@ export const getChallenges = async (address) => { //getting all game where curre
   return addresses;
 };
 export const deleteContract = async (address) => {
-  const response = await fetch(`https://rpsbackend-eln7.onrender.com/deleteContract/${address}`, {
+  const response = await fetch(`https://rpsbackend-eln7.onrender.com/api/deleteContract/${address}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
