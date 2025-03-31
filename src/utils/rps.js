@@ -3,10 +3,12 @@ import { CalculateHash } from "./hasher.js";
 import { RPS_ABI } from "../../contract_data.js";
 import { RPS_BYTECODE } from "../../contract_data.js";
 import { generateSalt } from "../salt.js";
+import { saveContract } from "./api.js";
+import { ApiProvider } from "@reduxjs/toolkit/query/react";
 export const CreateRPS = async (move, value, oppAdd) => {
   //const salt=generateSalt();
   //console.log(typeof(salt));
-  const salt = Math.floor(Math.random() * 4e58) + 1;
+  const salt = Math.floor(Math.random() * 4e10) + 1;
   
   console.log(salt);
   try {
@@ -18,9 +20,10 @@ export const CreateRPS = async (move, value, oppAdd) => {
 
     // Request MetaMask connection
     const provider = new ethers.BrowserProvider(window.ethereum);
-    await provider.send("eth_requestAccounts", []);
+    const accounts=await provider.send("eth_requestAccounts", []);
     // Get signer (MetaMask account)
     const signer = await provider.getSigner();
+
 
     // Create contract factory
     const contractFactory = new ethers.ContractFactory(
@@ -39,6 +42,9 @@ export const CreateRPS = async (move, value, oppAdd) => {
     console.log("Deploying contract...");
     await contract.waitForDeployment();
     console.log("Contract deployed at:", contract.target);
+
+
+    await saveContract(accounts[0],oppAdd,contract.target);
     const data = { address: contract.target, salt: salt };
     return data;
   } catch (error) {

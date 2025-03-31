@@ -58,9 +58,9 @@ export function GameCard(props) {
   }, [account_address, creator, OpponentAddress]);
 
   return (
-    <div className="border-4 rounded-2xl border-amber-100">
+    <div className="border-4 rounded-2xl border-amber-100 w-fit p-10 m-5">
       <button
-        className="m-2"
+        className=""
         onClick={(e) => {
           getValue();
           getStatus();
@@ -69,7 +69,7 @@ export function GameCard(props) {
       >
         Refresh
       </button>
-      <h1 className="font-bold">{props.contractAddress}</h1>
+      <h1 className="m-2 font-extrabold">{props.contractAddress}</h1>
 
       <p className="font-bold text-2xl">{value} Tx</p>
       <p>Creator:{creator}</p>
@@ -89,7 +89,7 @@ export function GameCard(props) {
           }}
         >
           {moves.map((k, val) => (
-            <option value={val + 1}>{k}</option>
+            <option value={val + 1} key={val}>{k}</option>
           ))}
         </select>
       </div>
@@ -107,6 +107,7 @@ export function GameCard(props) {
         </div>
 
         <button
+        
           disabled={!timeOut}
           onClick={(e) => {
             TimeOut(props.contractAddress, account_address);

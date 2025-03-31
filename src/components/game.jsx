@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CalculateHash } from "../utils/hasher";
 import { CreateRPS } from "../utils/rps";
+import { toast,ToastContainer } from "react-toastify";
 
 const Game = () => {
   const [hash, setHash] = useState(0);
@@ -14,11 +15,14 @@ const Game = () => {
     console.log('constructor called')
     let val = await CreateRPS(move, value, oppAdd);
     setHash(val.address);
-    setSalt(val.salt);
+    setSalt(val.salt.toFixed());
+    alert(`Your Contract is created. Remember your move and save Secret code:${val.salt.toFixed()}.
+     Share address with your frnd:${val.address}`)
   };
 
   return (
     <div>
+      <ToastContainer />
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -46,7 +50,7 @@ const Game = () => {
             }}
           >
             {moves.map((k, val) => (
-              <option value={val + 1}>{k}</option>
+              <option value={val + 1} key={val}>{k}</option>
             ))}
           </select>
 

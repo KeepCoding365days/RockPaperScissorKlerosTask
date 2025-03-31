@@ -2,7 +2,7 @@ import { ethers } from "ethers";
 import { CalculateHash } from "./hasher.js";
 import { RPS_ABI } from "../../contract_data.js";
 import { toast } from "react-toastify";
-
+import { deleteContract } from "./api.js";
 const getContract = async (address) => {
     try{
   const provider = new ethers.BrowserProvider(window.ethereum);
@@ -108,6 +108,8 @@ export const Solve = async (address, account, move, salt) => {
     if (parseInt(j1) === parseInt(account)) {
       await contract.solve(move, salt);
       toast.done("Game Finished. Check your wallet for rewards");
+      alert("Game Finished. Check your wallet for rewards");
+      await deleteContract(address);
       return;
     } else {
       alert("You are not allowed to use this feature.");
