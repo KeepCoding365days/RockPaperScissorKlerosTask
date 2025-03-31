@@ -1,5 +1,5 @@
 export const saveContract = async (j1, j2, address) => {
-  const response = await fetch("http://127.0.0.1:8000/api/addContract/", {
+  const response = await fetch("https://rpsbackend-eln7.onrender.com/api/addContract/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -10,7 +10,7 @@ export const saveContract = async (j1, j2, address) => {
 };
 export const getContracts = async (address) => {  //getting all games created by user
   const response = await fetch(
-    `http://127.0.0.1:8000/api/myContracts/${address}/`,
+    `https://rpsbackend-eln7.onrender.com/api/myContracts/${address}/`,
     {
       method: "GET",
       headers: {
@@ -36,7 +36,7 @@ export const getContracts = async (address) => {  //getting all games created by
 
 export const getChallenges = async (address) => { //getting all game where current user is challenged by others
   const response = await fetch(
-    `http://127.0.0.1:8000/api/myChallenges/${address}/`,
+    `https://rpsbackend-eln7.onrender.com/myChallenges/${address}/`,
     {
       method: "GET",
       headers: {
@@ -58,7 +58,7 @@ export const getChallenges = async (address) => { //getting all game where curre
   return addresses;
 };
 export const deleteContract = async (address) => {
-  const response = await fetch(`http://127.0.0.1:8000/api/deleteContract/${address}`, {
+  const response = await fetch(`https://rpsbackend-eln7.onrender.com/deleteContract/${address}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
