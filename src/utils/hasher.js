@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import { HASH_ABI } from "../../contract_data";
 
-const env = await import.meta.env;
+const env = import.meta.env;
 const provider = new ethers.JsonRpcProvider(env.VITE_ALCHEMY_KEY);
 const contract = new ethers.Contract(env.VITE_HASH_CON_ADD, HASH_ABI, provider);
 
